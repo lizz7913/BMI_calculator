@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:bmi_calculator/bmi_result_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -181,12 +184,14 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                   weight--;
                                 });
                               },
+                              heroTag: 'weight-',
                               mini: true,
                               child: Icon(
                                 Icons.remove,
                               ),
                             ),
                             FloatingActionButton(
+                              heroTag: 'weight+',
                               onPressed: () {
                                 setState(() {
                                   weight++;
@@ -230,6 +235,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
+                              heroTag:'age-',
                               onPressed: () {
                                 setState(() {
                                   age--;
@@ -241,6 +247,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                               ),
                             ),
                             FloatingActionButton(
+                              heroTag: 'age+',
                               onPressed: () {
                                 setState(() {
                                   age++;
@@ -267,7 +274,14 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             width: double.infinity,
             color: Colors.red,
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                double result= weight/ pow(height/100, 2);
+                print(result.round());
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BMIResultScreen(),),
+                );
+              },
               height: 50,
               child: Text(
                 'Calculate',
@@ -279,4 +293,5 @@ class _BmiCalculatorState extends State<BmiCalculator> {
       ),
     );
   }
+
 }
